@@ -1,0 +1,218 @@
+;=====================================================
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/jaagr/polybar
+;
+;   The README contains alot of information
+;
+;=====================================================
+
+[colors]
+background = #000
+background-alt = #87588a
+foreground = #52938e
+foreground-alt = #04242d
+primary = #38acd6
+secondary = #e60053
+alert = #D783F2
+alert-alt = #203E4A
+
+
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+
+
+[bar/mybar]
+;monitor = ${env:MONITOR:HDMI-1}
+width = 100%
+bottom = true
+height = 24
+offset-x = 0
+offset-y = 0
+
+;background = ${colors.background-alt}
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+overline-size = 2
+overline-color = #f00
+underline-size = 2
+underline-color = #00f
+
+border-bottom-size = 0
+border-bottom-color = #333
+
+padding-left = 0
+padding-right = 2
+module-margin-left = 1
+module-margin-right = 2
+
+font-0 = Overpass:pixelsize=13
+font-1 = FontAwesome:pixelsize=11;-2
+
+tray-position = right
+tray-padding = 0
+;tray-transparent = true
+;tray-background = #0063ff
+tray-scale = 0.95
+
+;wm-restack = i3
+
+;override-redirect = true
+
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+
+
+
+; MODULES
+modules-left = i3
+modules-center = date time rofi
+modules-right = cpu filesystem memory battery
+
+
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:30:...%
+
+
+
+[module/rofi]
+type = custom/text
+content = 
+click-left = rofi -show run
+format-offset = -5
+
+
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
+
+label-focused = %name%
+label-focused-foreground = ${colors.foreground-alt}
+label-focused-background = ${colors.background-alt}
+label-focused-underline = #38acd6
+label-focused-padding = 2
+
+label-unfocused = %name%
+label-unfocused-padding = 2
+
+label-urgent = %name%
+label-urgent-foreground = ${colors.alert-alt}
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+label-visible = %name%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = %A, %b. %d
+time = %H:%M
+
+format = %{A:gsimplecal:} <label> %{A}
+format-font = 1
+format-prefix-foreground = ${colors.foreground}
+format-underline = ${colors.background}
+format-offset = 60
+label = "%date%"
+
+
+
+[module/time]
+type = internal/date
+interval = 5
+
+time = %H:%M
+
+format = %{A:gnome-clocks:} <label> %{A}
+format-font = 1
+format-prefix-foreground = ${colors.foreground}
+format-underline = ${colors.background}
+format-offset = -5
+label = "%time%"
+
+
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+
+format-suffix = " "
+format-suffix-foreground = ${colors.foreground}
+format-underline = #f497fa
+label = %percentage%%
+
+
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+mount-0 = /
+
+label-mounted = %free%
+label-unmounted = %mountpoint%: not mounted
+label-unmounted-foreground = ${colors.foreground}
+format-mounted-underline = #d161d8
+
+
+
+[module/memory]
+type = internal/memory
+interval = 2
+
+format-suffix = " "
+format-suffix-foreground = ${colors.foreground}
+format-underline = #ac35b4
+label = %percentage_used%%
+
+
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = ADP1
+full-at = 100
+
+format-charging = <label-charging> <animation-charging>
+format-charging-underline = #7f1685
+format-discharging = <label-discharging> <ramp-capacity>
+format-discharging-underline = ${self.format-charging-underline}
+
+format-full-prefix = 
+format-full-prefix-foreground = ${colors.foreground}
+format-full-underline = ${self.format-charging-underline}
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 =  
+ramp-capacity-4 = 
+ramp-capacity-foreground = ${colors.foreground}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-foreground = ${colors.foreground}
+animation-charging-framerate = 750
+
+
+; vim:ft=dosini
